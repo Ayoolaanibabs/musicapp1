@@ -11,4 +11,4 @@ function convertMsToMinutesSeconds(milliseconds: number): string {
     : `${minutes}:${padTo2Digits(seconds)}`;
 }
 
-export default convertMsToMinutesSeconds
+export default convertMsToMinutesSeconds;

@@ -2,7 +2,7 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Space, Typography } from "antd";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { pathNames } from '../../../constants';
+import { pathNames } from '../../../utilities/constants';
 import useWindowDimensions  from '../../../hooks/windows';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import Search from './search';
@@ -17,6 +17,11 @@ function HomePageHeader()  {
       name, imageUrl
     },
   } = useSelector((state: IStoreType) => state.user);
+
+  const logout = () => {
+    window.localStorage.removeItem("token");
+    window.location.href = pathNames.login;
+  }
 
 
   return(
@@ -33,7 +38,7 @@ function HomePageHeader()  {
           </Link>
           {/* <Link type="warning"> */}
           <Text>
-            <LogoutOutlined />
+            <LogoutOutlined onClick={logout} style={{ color: '#ffffff' }} />
           </Text>
           {/* </Link> */}
         </Space>

@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login } from './views/login';
 import { HomePage } from './views/homePage';
 import { Library } from './views/library';
-import { pathNames } from './constants';
+import { pathNames } from './utilities/constants';
 import { useDispatch } from 'react-redux';
 import { setUserData } from './store/user.slice';
 import { useEffect, useState } from 'react';
