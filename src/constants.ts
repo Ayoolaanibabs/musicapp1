@@ -1,5 +1,5 @@
 export const pathNames = {
-  home: '/',
-  homePage: '/home',
+  login: '/',
+  home: '/home',
   library: '/library'
 };

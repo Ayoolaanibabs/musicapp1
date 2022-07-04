@@ -6,24 +6,20 @@ const initialState: INewReleaseType = {
 };
 
 const mySlice = createSlice({
-  name: 'playlist',
+  name: 'newRelease',
   initialState,
   reducers: {
-    setPlaylist: (state, action) => {
+    setNewRelease: (state, action) => {
       state.data.push(action.payload);
     },
-    clearPlaylist: (state) => {
-      state.data = [];
-      return state;
-    }
   },
 });
 
 const {
-  setPlaylist, clearPlaylist
+  setNewRelease,
 } = mySlice.actions;
 
 export {
-  setPlaylist, clearPlaylist
+  setNewRelease,
 };
 export default mySlice.reducer;

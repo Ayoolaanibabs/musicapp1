@@ -1,4 +1,11 @@
-import { IPlaylist } from "./Playlist.interface";
+import { INewReleaseType } from "./NewReleaseType.interface";
+import { IPlaylistType } from "./PlaylistType.interface";
+import { ISearchResultType } from "./SearchResultType.interface";
+import { IUserType } from "./UserType.interface";
+
 export interface IStoreType {
- playlist: IPlaylist,
+ user: IUserType
+ newRelease: INewReleaseType
+ searchResult: ISearchResultType
+ playlist: IPlaylistType
 }
