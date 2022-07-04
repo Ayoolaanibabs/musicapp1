@@ -11,7 +11,6 @@ import { UserOutlined } from '@ant-design/icons';
 
 const MainRouter = (): JSX.Element => {
   const dispatch = useDispatch();
-
   const [token, setToken] = useState<string>("");
 
   useEffect(()=>{

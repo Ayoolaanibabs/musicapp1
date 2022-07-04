@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const authEndpoint = "";
-const clientID = "";
-const redirectURI = "http://localhost:3000/home";
+const authEndpoint = process.env.REACT_APP_SPOTIFY_AUTH_ENDPOINT;
+const clientID =  process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+const redirectURI =  process.env.REACT_APP_SPOTIFY_REDIRECT_URI;
 const scopes = ["playlist-modify-public", "user-read-private"];
 
 export const loginEndpoint: string =`${authEndpoint}client_id=${clientID}&redirect_uri=${redirectURI}&scope=${scopes.join(
