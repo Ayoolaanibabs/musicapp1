@@ -18,7 +18,6 @@ const databaseRef = firebase.database().ref();
 export const songsRef = databaseRef.child("songs");
 
 export const addSong = (spotifyId: string, imageUrl: string, name: string, songUri: string) => {
-  // e.preventDefault();
   const data = {
     spotifyId,
     imageUrl,
@@ -27,13 +26,3 @@ export const addSong = (spotifyId: string, imageUrl: string, name: string, songU
   }
   songsRef.push(data);
 } 
-
-// export const getSongsBySpotifyId = (spotifyId: string) => {
-//   songsRef.get().then((snapshot) => {
-//     if (snapshot.exists()) {
-//       console.log(snapshot.val());
-//     } else {
-//       console.log("No data available");
-//     }
-//   })
-// }
