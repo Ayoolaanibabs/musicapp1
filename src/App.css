@@ -15,6 +15,10 @@
   min-width: 15vmin !important;
 }
 
+.ant-layout-header {
+  padding: 0 5vmin !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

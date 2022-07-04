@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
+import { sendNotification } from '../utilities/helper';
 
 
 const firebaseConfig = {
@@ -24,5 +25,34 @@ export const addSong = (spotifyId: string, imageUrl: string, name: string, songU
     name,
     songUri
   }
-  songsRef.push(data);
-} 
+  const query = songsRef.orderByChild("songUri").equalTo(songUri);
+      query.once("value")
+      .then(function(snapshot) {
+        if (snapshot.exists()) {
+          snapshot.forEach(function(childSnapshot) {
+            let childData = childSnapshot.val();
+            if (childData['spotifyId'] === spotifyId){
+              sendNotification('info',`${name} already in Library`);
+            } else {
+              songsRef.push(data);
+              sendNotification('success',`${name} added to Library`);
+            }
+        });
+        } else if (!snapshot.exists()) {
+          songsRef.push(data);
+          sendNotification('success',`${name} added to Library`);
+        }else {
+          sendNotification('error',`An Error Occured`);
+        }
+    }).catch((error) => {
+      sendNotification('error',`${error.message}`);
+    });
+}
+
+export const deleteSong = (songUri: string, name: string) => {
+  const query = songsRef.orderByChild("songUri").equalTo(songUri);
+  query.on("child_added", (snapshot) => {
+    snapshot.ref.remove();
+    sendNotification('success',`${name} removed from Library`);
+  });
+}

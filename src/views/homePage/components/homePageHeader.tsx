@@ -1,17 +1,14 @@
 import { LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Space, Typography } from "antd";
+import { Avatar, Popconfirm, Typography } from "antd";
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { pathNames } from '../../../utilities/constants';
-import useWindowDimensions  from '../../../hooks/windows';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import Search from './search';
-import spaceWidth from './spaceWidth';
 
 const { Text } = Typography;
 
 function HomePageHeader()  {
-  const { isLarge, isMedium, isExtraLarge, isExtraSmall, isSmall } = useWindowDimensions();
   const {
     user: {
       name, imageUrl
@@ -25,23 +22,29 @@ function HomePageHeader()  {
 
 
   return(
-    <Space size={spaceWidth(isLarge, isMedium, isExtraLarge, isExtraSmall, isSmall)}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <Text type="warning">
             <Avatar src={imageUrl} alt="user" />
           </Text>
-          <Text type="warning">
-            {name}
-          </Text> 
+          <div style={{ color: 'yellow' }}>
+            {name.split(' ')[0]}
+          </div>
           <Search />
           <Link to={pathNames.library}>
-            Mylibrary
+            My library
           </Link>
-          {/* <Link type="warning"> */}
           <Text>
-            <LogoutOutlined onClick={logout} style={{ color: '#ffffff' }} />
+          <Popconfirm
+            title={`Hi ${name.split(' ')[0]}, you are about to sign out of your account`}
+            onConfirm={logout}
+            okText="Yes"
+            cancelText="No"
+            placement='bottomLeft'
+          >
+            <LogoutOutlined style={{ color: '#ffffff' }} />
+          </Popconfirm>
           </Text>
-          {/* </Link> */}
-        </Space>
+          </div>
   )
 }
 

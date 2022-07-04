@@ -25,7 +25,7 @@ function Search() {
   }
   return (
     <div>
-      <Input placeholder="Search" onChange={onChange} />
+      <Input placeholder="Search" style={{ width: '40vmin' }} onChange={onChange} />
     </div>
   )
 }

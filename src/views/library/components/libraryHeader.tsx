@@ -1,40 +1,55 @@
-import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
-import { Space, Typography } from "antd";
+import { LogoutOutlined } from '@ant-design/icons';
+import { Avatar, Popconfirm, Typography } from "antd";
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import useWindowDimensions  from '../../../hooks/windows';
+import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { pathNames } from '../../../utilities/constants';
-import spaceWidth from '../../homePage/components/spaceWidth';
 
 const { Text } = Typography;
 
 function LibraryHeader()  {
-  const { isLarge, isMedium, isExtraLarge, isExtraSmall, isSmall } = useWindowDimensions();
 
+  const {
+    user: {
+      name, imageUrl
+    },
+  } = useSelector((state: IStoreType) => state.user);
+  
   const logout = () => {
     window.localStorage.removeItem("token");
     window.location.href = pathNames.login;
   }
 
   return(
-    <Space size={spaceWidth(isLarge, isMedium, isExtraLarge, isExtraSmall, isSmall)}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
           <Text type="warning">
-            {<UserOutlined /> }
+            <Avatar src={imageUrl} alt="user" />
           </Text>
           {/* <Link type="warning"> */}
           <Text type="warning">
-            ExportToMySpotify
+            Export To My Spotify
           </Text>
           {/* </Link>  */}
           <Text type="warning">
-            Mylibrary
+            My library
           </Text>
-          <Link type="warning" to={pathNames.home}>
+          <Link to={pathNames.home}>
             Search
           </Link>
-          {/* <Link type="warning"> */}
-            <LogoutOutlined onClick={logout} style={{ color: '#ffffff' }} />
-          {/* </Link> */}
-        </Space>
+          <Text>
+          <Popconfirm
+            title={`Hi ${name.split(' ')[0]}, you are about to sign out of your account`}
+            onConfirm={logout}
+            okText="Yes"
+            cancelText="No"
+            placement='bottomLeft'
+          >
+            <LogoutOutlined style={{ color: '#ffffff' }} />
+          </Popconfirm>
+            </Text>
+
+        </div>
   )
 }
 

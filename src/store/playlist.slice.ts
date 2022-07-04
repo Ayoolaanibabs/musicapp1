@@ -12,6 +12,10 @@ const mySlice = createSlice({
     setPlaylist: (state, action) => {
       state.data.push(action.payload);
     },
+    deleteSongFromPlaylist: (state, action) => {
+      state.data.splice(action.payload, 1);
+      return state
+    }, 
     clearPlaylist: (state) => {
       state.data = [];
       return state;
@@ -19,11 +23,15 @@ const mySlice = createSlice({
   },
 });
 
+// var lists = list.filter(x => {
+//   return x.Id != id;
+// })
+
 const {
-  setPlaylist, clearPlaylist
+  setPlaylist, clearPlaylist, deleteSongFromPlaylist
 } = mySlice.actions;
 
 export {
-  setPlaylist, clearPlaylist
+  setPlaylist, clearPlaylist, deleteSongFromPlaylist
 };
 export default mySlice.reducer;
