@@ -18,7 +18,7 @@ function Search() {
           imageUrl: element.album.images[1].url,
           album: element.album.name,
           time: element.duration_ms,
-          songUri: element.uri,
+          trackUri: element.uri,
         }))
       });
     })

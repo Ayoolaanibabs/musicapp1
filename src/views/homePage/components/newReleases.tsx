@@ -14,7 +14,9 @@ function NewReleases() {
   const [loading, setLoading] = useState<boolean>();
 
   const { data } = useSelector((state: IStoreType) => state.newRelease);
-  // const { user }
+
+  // const playlistData = useSelector((state: IStoreType) => state.playlist);
+
 
   
 
@@ -22,7 +24,7 @@ function NewReleases() {
     if(data.length === 0) {
       (async () => {
         setLoading(true);
-        await apiClient.get("browse/new-releases?limit=4&type=track").then(response => {
+        await apiClient.get("browse/new-releases?limit=4").then(response => {
           setLoading(false);
           response.data.albums.items.forEach((element: any) => {
             dispatch(setNewRelease({
@@ -40,7 +42,11 @@ function NewReleases() {
     <>
     <Divider orientation="left">New Releases</Divider>
     <Row gutter={12} style={{ display: 'flex', justifyContent: 'center' }}>
-      {data.map((e: INewRelease) => {
+      {data.map((e: INewRelease, index: number) => {
+        // console.log(playlistData.data, e.imageUrl);
+        // const added = data.find(playlist => e.name === playlist.name);
+        // console.log(added);
+        // const search = what => array.find(element => element.name === what);
         return (
         <Col className="gutter-row" span={5}>
           <Card
@@ -48,7 +54,14 @@ function NewReleases() {
             loading={loading}
             cover={<img style={{ height: '25vmin' }} alt="example" src={e.imageUrl} />}
           >
-            <Meta title={e.name} description={['Save to library', <PlusCircleOutlined style={{ marginLeft: '2vmin' }} />,]} />
+            <Meta 
+            title={e.name} 
+            description={[
+              'Save to library',
+              <PlusCircleOutlined style={{ marginLeft: '2vmin' }} /> 
+              // `${ loading ? <MinusCircleOutlined style={{ marginLeft: '2vmin' }}  /> : <PlusCircleOutlined style={{ marginLeft: '2vmin' }} />}`,
+            ]} 
+          />
           </Card>
         </Col>
         )

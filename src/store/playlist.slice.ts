@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { INewReleaseType } from '../interfaces/NewReleaseType.interface';
+import { IPlaylistType } from '../interfaces/PlaylistType.interface';
 
-const initialState: INewReleaseType = {
+const initialState: IPlaylistType = {
   data: []  
 };
 
@@ -13,7 +13,7 @@ const mySlice = createSlice({
       state.data.push(action.payload);
     },
     deleteSongFromPlaylist: (state, action) => {
-      state.data.splice(action.payload, 1);
+      state.data.splice(state.data.findIndex(item => item.trackUri === action.payload), 1)
       return state
     }, 
     clearPlaylist: (state) => {

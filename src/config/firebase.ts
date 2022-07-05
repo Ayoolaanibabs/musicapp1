@@ -18,14 +18,14 @@ firebase.initializeApp(firebaseConfig);
 const databaseRef = firebase.database().ref();
 export const songsRef = databaseRef.child("songs");
 
-export const addSong = (spotifyId: string, imageUrl: string, name: string, songUri: string) => {
+export const addSong = async (spotifyId: string, imageUrl: string, name: string, trackUri: string) => {
   const data = {
     spotifyId,
     imageUrl,
     name,
-    songUri
+    trackUri,
   }
-  const query = songsRef.orderByChild("songUri").equalTo(songUri);
+  const query = songsRef.orderByChild("trackUri").equalTo(trackUri);
       query.once("value")
       .then(function(snapshot) {
         if (snapshot.exists()) {
@@ -49,8 +49,9 @@ export const addSong = (spotifyId: string, imageUrl: string, name: string, songU
     });
 }
 
-export const deleteSong = (songUri: string, name: string) => {
-  const query = songsRef.orderByChild("songUri").equalTo(songUri);
+
+export const deleteSong = (trackUri: string, name: string) => {
+  const query = songsRef.orderByChild("trackUri").equalTo(trackUri);
   query.on("child_added", (snapshot) => {
     snapshot.ref.remove();
     sendNotification('success',`${name} removed from Library`);

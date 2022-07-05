@@ -3,7 +3,7 @@ export interface ISearchResult{
   imageUrl: string;
   album: string;
   time: string;
-  songUri: string;
+  trackUri: string;
 };
 
 export interface ISearchResultType{
