@@ -46,9 +46,9 @@ function LibraryHeader()  {
     data.forEach((e: IPlaylist) => {
       songUris.push(e.trackUri);
     })
-    const uris = songUris.join("%20");
+    const uris = songUris.join(",");
     apiClient.post(`playlists/${playlistId}/tracks?uris=${uris}`).then(() => {
-      sendNotification('success', 'Playlist Successfully Created')
+      sendNotification('success', 'Playlist Successfully Exported')
     })
   }
 
