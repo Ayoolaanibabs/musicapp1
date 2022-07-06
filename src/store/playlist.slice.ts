@@ -16,10 +16,6 @@ const mySlice = createSlice({
       state.data.splice(state.data.findIndex((item) => item.trackUri === action.payload), 1);
       return state;
     },
-    clearPlaylist: (state) => {
-      state.data = [];
-      return state;
-    },
   },
 });
 
@@ -28,10 +24,10 @@ const mySlice = createSlice({
 // })
 
 const {
-  setPlaylist, clearPlaylist, deleteSongFromPlaylist,
+  setPlaylist, deleteSongFromPlaylist,
 } = mySlice.actions;
 
 export {
-  setPlaylist, clearPlaylist, deleteSongFromPlaylist,
+  setPlaylist, deleteSongFromPlaylist,
 };
 export default mySlice.reducer;

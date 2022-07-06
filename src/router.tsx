@@ -47,6 +47,7 @@ function MainRouter(): JSX.Element {
   }, []);
 
   useEffect(() => {
+    if (token) {
     apiClient.get('me').then((response) => {
       response.data.images.length !== 0 ? dispatch(setUserData({
         id: response.data.id,
@@ -59,11 +60,14 @@ function MainRouter(): JSX.Element {
           imageUrl: <UserOutlined />,
         }));
       setId(response.data.id);
+    }).catch((error) => {
+      sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
     });
+  }
   });
 
   useEffect(() => {
-    // dispatch(clearPlaylist())
+    if(token){
     const query = songsRef.orderByChild(CHILD_TYPE.SPOTIFY_ID).equalTo(id);
     query.once('value')
       .then((snapshot) => {
@@ -76,7 +80,8 @@ function MainRouter(): JSX.Element {
       }).catch((error) => {
         sendNotification(NOTIFICATION_TYPE.ERROR, error.message);
       });
-  }, [id, dispatch]);
+    }
+  }, [id, dispatch, token]);
 
   return (
     <Router>

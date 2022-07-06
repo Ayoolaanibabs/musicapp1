@@ -38,8 +38,11 @@ function LibraryHeader() {
       description: TEXTS.PLAYLIST_DESCRIPTION,
       public: false,
     };
-    apiClient.post(`${SPOTIFY_URLS.CREATE_PLAYLIST_USER}${id}${SPOTIFY_URLS.CREATE_PLAYLIST_PLAYLISTS}`, data).then((response) => {
+    apiClient.post(`${SPOTIFY_URLS.CREATE_PLAYLIST_USER}${id}${SPOTIFY_URLS.CREATE_PLAYLIST_PLAYLISTS}`, data)
+    .then((response) => {
       addToSpotifyPlaylist(response.data.id);
+    }).catch((error) => {
+      sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
     });
   };
 
@@ -49,8 +52,11 @@ function LibraryHeader() {
       songUris.push(e.trackUri);
     });
     const uris = songUris.join(',');
-    apiClient.post(`${SPOTIFY_URLS.ADD_TO_PLAYLIST_PLAYLISTS}${playlistId}${SPOTIFY_URLS.ADD_TO_PLATLIST_TRACK}${uris}`).then(() => {
+    apiClient.post(`${SPOTIFY_URLS.ADD_TO_PLAYLIST_PLAYLISTS}${playlistId}${SPOTIFY_URLS.ADD_TO_PLATLIST_TRACK}${uris}`)
+    .then(() => {
       sendNotification(NOTIFICATION_TYPE.SUCCESS, MESSAGES.PLAYLIST_EXPORT_SUCCESS);
+    }).catch((error) => {
+      sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
     });
   };
 

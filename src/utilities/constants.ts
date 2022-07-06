@@ -32,7 +32,8 @@ export const MESSAGES = {
   SIGN_OUT: 'you are about to sign out of your account',
   HI: 'Hi',
   PLAYLIST_EXPORT_SUCCESS: 'Playlist Successfully Exported',
-  NO_SONGS: 'No Songs have been added to libarary'
+  NO_SONGS: 'No Songs have been added to libarary',
+  CANNOT_ADD_ALBUM: 'is an album, only tracks can be added to the library',
 };
 
 export const TEXTS = {
@@ -67,7 +68,9 @@ export const SPOTIFY_URLS = {
   CREATE_PLAYLIST_USER: 'users/',
   CREATE_PLAYLIST_PLAYLISTS: '/playlists',
   ADD_TO_PLAYLIST_PLAYLISTS: 'playlists/',
-  ADD_TO_PLATLIST_TRACK: '/tracks?uris='
+  ADD_TO_PLATLIST_TRACK: '/tracks?uris=',
+  GET_ALBUM_TRACKS_ALBUMS: 'albums/',
+  GET_ALBUM_TRACKS_TRACK: '/tracks',
 };
 
 export const IMAGE_ALT_TEXTS = {
@@ -95,3 +98,8 @@ export const CLASS_NAMES = {
   LOGIN_BTN: 'login-btn',
   LOGIN_PAGE: 'login-page',
 };
+
+export const ALBUM_TYPE = {
+  ALBUM: 'album',
+  SINGLE: 'single',
+}

@@ -1,9 +1,11 @@
+import { SearchOutlined } from '@ant-design/icons';
 import { Input } from 'antd';
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import apiClient from '../../../config/spotify';
 import { clearSearchResult, setSearchResult } from '../../../store/searchResult.slice';
-import { CLASS_NAMES, SPOTIFY_URLS, TEXTS } from '../../../utilities/constants';
+import { CLASS_NAMES, NOTIFICATION_TYPE, SPOTIFY_URLS, TEXTS } from '../../../utilities/constants';
+import { sendNotification } from '../../../utilities/helper';
 import './index.css';
 
 function Search() {
@@ -19,6 +21,8 @@ function Search() {
           trackUri: element.uri,
         }));
       });
+    }).catch((error) => {
+      sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
     });
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +32,7 @@ function Search() {
 
   return (
     <div>
-      <Input placeholder={TEXTS.SEARCH} className={CLASS_NAMES.SEARCH} onChange={onChange} />
+      <Input placeholder={TEXTS.SEARCH} prefix={<SearchOutlined />} className={CLASS_NAMES.SEARCH} onChange={onChange} />
     </div>
   );
 }
