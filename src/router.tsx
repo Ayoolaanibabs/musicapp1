@@ -24,7 +24,8 @@ function MainRouter(): JSX.Element {
     } else {
       window.localStorage.removeItem('token');
       window.localStorage.removeItem('tokenEXpiryTime');
-      return;
+      window.location.href = pathNames.login;
+      return
     }
   };
   useEffect(() => {
