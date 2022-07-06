@@ -1,0 +1,38 @@
+.container {
+  margin: 7vmin;
+}
+
+.avatar {
+  height: 24px;
+  width: 24px ;
+}
+
+.new-release-row {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.card-image {
+  height: 25vmin !important;
+}
+
+.icon-margin-left {
+  margin-left: 2vmin;
+}
+
+.search {
+  width: 40vmin !important;
+}
+
+.list-item-title {
+  display: flex;
+  justify-content: space-around;
+}
+
+.list-item-name {
+  width: 20vmin !important;
+}
+
+.icon-margin-top {
+  margin-top: 0.7vmin;
+}

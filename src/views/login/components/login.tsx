@@ -1,17 +1,18 @@
 import '../../../App.css';
 import './styles.css';
 import { loginEndpoint } from '../../../config/spotify';
+import { CLASS_NAMES, IMAGE_ALT_TEXTS, SPOTIFY_IMAGE_URL } from '../../../utilities/constants';
 
 function Login() {
   return (
-    <div className="login-page">
+    <div className={CLASS_NAMES.LOGIN_PAGE}>
       <img
-        src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
-        alt="logo-spotify"
-        className="logo"
+        src={SPOTIFY_IMAGE_URL}
+        alt={IMAGE_ALT_TEXTS.SPOTIFY_LOGO}
+        className={CLASS_NAMES.LOGO}
       />
       <a href={loginEndpoint}>
-        <div className="login-btn">LOG IN</div>
+        <div className={CLASS_NAMES.LOGIN_BTN}>LOG IN</div>
       </a>
     </div>
   );

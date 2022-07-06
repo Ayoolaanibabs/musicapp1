@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteSong } from '../../../config/firebase';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { deleteSongFromPlaylist } from '../../../store/playlist.slice';
+import { CLASS_NAMES, IMAGE_ALT_TEXTS, TEXTS } from '../../../utilities/constants';
+import './index.css';
 
 const { Meta } = Card;
 
@@ -24,26 +26,26 @@ function Content() {
   };
 
   return (
-    <div style={{ margin: '5vmin' }}>
+    <div className={CLASS_NAMES.CONTAINER}>
       <Row gutter={[12, 18]}>
         {data.map((e) => (
-          <Col className="gutter-row" span={6}>
+          <Col span={6}>
             <Card
               hoverable
               loading={loading}
-              cover={<img style={{ height: '25vmin' }} alt="example" src={e.imageUrl} />}
+              cover={<img className={CLASS_NAMES.CARD_IMAGE} alt={IMAGE_ALT_TEXTS.USER} src={e.imageUrl} />}
             >
               <Meta
                 title={e.name}
                 description={[
                   'Remove',
                   <Popconfirm
-                    title={`Are you sure to delete ${e.name} from Library`}
+                    title={`${TEXTS.DELETE} ${e.name} ${TEXTS.FROM_LIBRARY}`}
                     onConfirm={() => confirm(e.trackUri, e.name)}
-                    okText="Yes"
-                    cancelText="No"
+                    okText={TEXTS.YES}
+                    cancelText={TEXTS.NO}
                   >
-                    <MinusCircleOutlined style={{ marginLeft: '2vmin' }} />
+                    <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_LEFT} />
                   </Popconfirm>,
 
                 ]}

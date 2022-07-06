@@ -6,11 +6,12 @@ import { UserOutlined } from '@ant-design/icons';
 import { Login } from './views/login';
 import { HomePage } from './views/homePage';
 import { Library } from './views/library';
-import { pathNames } from './utilities/constants';
+import { CHILD_TYPE, MUSIC_APP_TOKEN, MUSIC_APP_TOKEN_EXPIRY_TIME, NOTIFICATION_TYPE, PATH_NAMES } from './utilities/constants';
 import { setUserData } from './store/user.slice';
 import apiClient, { setClientToken } from './config/spotify';
 import { setPlaylist } from './store/playlist.slice';
 import { songsRef } from './config/firebase';
+import { sendNotification } from './utilities/helper';
 
 function MainRouter(): JSX.Element {
   const dispatch = useDispatch();
@@ -18,25 +19,25 @@ function MainRouter(): JSX.Element {
   const [id, setId] = useState<string>('');
 
   const isLogged = () => {
-    const tokenExipiryTime: string = window.localStorage.getItem('tokenEXpiryTime') || '';
+    const tokenExipiryTime: string = window.localStorage.getItem(MUSIC_APP_TOKEN_EXPIRY_TIME) || '';
     if (moment().format() < tokenExipiryTime) {
       return;
     } else {
-      window.localStorage.removeItem('token');
-      window.localStorage.removeItem('tokenEXpiryTime');
-      window.location.href = pathNames.login;
+      window.localStorage.removeItem(MUSIC_APP_TOKEN);
+      window.localStorage.removeItem(MUSIC_APP_TOKEN_EXPIRY_TIME);
+      window.location.href = PATH_NAMES.LOGIN;
       return
     }
   };
   useEffect(() => {
-    const token: string = window.localStorage.getItem('token') || '';
+    const token: string = window.localStorage.getItem(MUSIC_APP_TOKEN) || '';
     const { hash } = window.location;
     window.location.hash = '';
     if(token) isLogged();
     if (!token && hash) {
-      window.localStorage.setItem('tokenEXpiryTime', moment().add(1, 'hours').format());
+      window.localStorage.setItem(MUSIC_APP_TOKEN_EXPIRY_TIME, moment().add(1, 'hours').format());
       const _token = hash.split('&')[0].split('=')[1];
-      window.localStorage.setItem('token', _token);
+      window.localStorage.setItem(MUSIC_APP_TOKEN, _token);
       setToken(_token);
       setClientToken(_token);
     } else {
@@ -46,7 +47,6 @@ function MainRouter(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    // (async () => {
     apiClient.get('me').then((response) => {
       response.data.images.length !== 0 ? dispatch(setUserData({
         id: response.data.id,
@@ -60,12 +60,11 @@ function MainRouter(): JSX.Element {
         }));
       setId(response.data.id);
     });
-    // })()
   });
 
   useEffect(() => {
     // dispatch(clearPlaylist())
-    const query = songsRef.orderByChild('spotifyId').equalTo(id);
+    const query = songsRef.orderByChild(CHILD_TYPE.SPOTIFY_ID).equalTo(id);
     query.once('value')
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -73,23 +72,19 @@ function MainRouter(): JSX.Element {
             const childData = childSnapshot.val();
             dispatch(setPlaylist(childData));
           });
-        } else {
-          console.log('No data Availablepp');
-          return null;
         }
       }).catch((error) => {
-        console.error(error);
-        return null;
+        sendNotification(NOTIFICATION_TYPE.ERROR, error.message);
       });
   }, [id, dispatch]);
 
   return (
     <Router>
       <Routes>
-        <Route path={pathNames.login} element={<Login />} />
-        <Route path={pathNames.wildroute} element={<Login />} />
-        {!token ? <Route path={pathNames.wildroute} element={<Login />} /> : <Route path={pathNames.home} element={<HomePage />} />}
-        {!token ? <Route path={pathNames.wildroute} element={<Login />} /> : <Route path={pathNames.library} element={<Library />} />}
+        <Route path={PATH_NAMES.LOGIN} element={<Login />} />
+        <Route path={PATH_NAMES.WILD_ROUTE} element={<Login />} />
+        {token ? <Route path={PATH_NAMES.HOME} element={<HomePage />} /> : <Route path={PATH_NAMES.LOGIN} element={<Login />} />}
+        {token ? <Route path={PATH_NAMES.LIBRARY} element={<Library />} /> : <Route path={PATH_NAMES.LOGIN} element={<Login />} />}
       </Routes>
     </Router>
   );

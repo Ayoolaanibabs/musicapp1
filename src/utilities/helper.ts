@@ -1,4 +1,5 @@
 import { notification } from 'antd';
+import { NotificationType } from '../interfaces/NotificationType.interface';
 
 function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0');
@@ -13,7 +14,6 @@ function convertMsToMinutesSeconds(milliseconds: number): string {
     : `${minutes}:${padTo2Digits(seconds)}`;
 }
 
-type NotificationType = 'success' | 'info' | 'warning' | 'error';
 export const sendNotification = (type: NotificationType, message: string) => {
   notification[type]({
     message,

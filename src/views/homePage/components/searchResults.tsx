@@ -5,7 +5,9 @@ import { addSong, deleteSong } from '../../../config/firebase';
 import { ISearchResult } from '../../../interfaces/SearchResultType.interface';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { deleteSongFromPlaylist, setPlaylist } from '../../../store/playlist.slice';
+import { CLASS_NAMES, HORIZONTAL_LIST_ITEM_LAYOUT, LIST_SIZE_SMALL } from '../../../utilities/constants';
 import convertMsToMinutesSeconds from '../../../utilities/helper';
+import './index.css';
 
 function SearchResults() {
   const dispatch = useDispatch();
@@ -30,29 +32,28 @@ function SearchResults() {
   };
 
   return (
-    <div style={{ margin: '7vmin' }}>
+    <div className={CLASS_NAMES.CONTAINER}>
       <List
         bordered
       // loading={loading}
-        itemLayout="horizontal"
-        size="small"
+        itemLayout={HORIZONTAL_LIST_ITEM_LAYOUT}
+        size={LIST_SIZE_SMALL}
         dataSource={data}
         renderItem={(item: ISearchResult) => {
           const result = playlistData.data.find((playlist) => item.trackUri === playlist.trackUri);
-          console.log(result);
           return (
             <>
               <List.Item>
                 <List.Item.Meta
                   avatar={<Avatar src={item.imageUrl} />}
                   title={(
-                    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                      <div style={{ width: '20vmin' }}>
+                    <div className={CLASS_NAMES.LIST_ITEM_TITLE}>
+                      <div className={CLASS_NAMES.LIST_ITEM_NAME}>
                         {item.name}
                       </div>
-                      <div style={{ width: '20vmin' }}>{item.album}</div>
+                      <div className={CLASS_NAMES.LIST_ITEM_NAME}>{item.album}</div>
                       <div>{convertMsToMinutesSeconds(Number(item.time))}</div>
-                      { result ? <MinusCircleOutlined style={{ marginTop: '0.7vmin' }} onClick={() => deleteTrack(item)} /> : <PlusCircleOutlined style={{ marginTop: '0.7vmin' }} onClick={() => addTrack(item)} /> }
+                      { result ? <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => deleteTrack(item)} /> : <PlusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => addTrack(item)} /> }
                     </div>
                 )}
                 />
