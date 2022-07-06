@@ -49,7 +49,7 @@ export const addSong = async (spotifyId: string, imageUrl: string, name: string,
 
 export const deleteSong = (trackUri: string, name: string) => {
   const query = songsRef.orderByChild('trackUri').equalTo(trackUri);
-  query.on('child_added', (snapshot) => {
+  query.once('child_added', (snapshot) => {
     snapshot.ref.remove();
     sendNotification('success', `${name} removed from Library`);
   });

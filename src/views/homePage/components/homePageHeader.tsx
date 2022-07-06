@@ -17,6 +17,7 @@ function HomePageHeader() {
 
   const logout = () => {
     window.localStorage.removeItem('token');
+    window.localStorage.removeItem('tokenEXpiryTime');
     window.location.href = pathNames.login;
   };
 

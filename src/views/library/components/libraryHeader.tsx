@@ -1,6 +1,7 @@
 import { LogoutOutlined } from '@ant-design/icons';
 import { Avatar, Popconfirm, Typography } from 'antd';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import apiClient from '../../../config/spotify';
 import { ICreatePlaylistData, IPlaylist } from '../../../interfaces/PlaylistType.interface';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
@@ -26,6 +27,7 @@ function LibraryHeader() {
 
   const logout = () => {
     window.localStorage.removeItem('token');
+    window.localStorage.removeItem('tokenEXpiryTime');
     window.location.href = pathNames.login;
   };
 
@@ -64,9 +66,9 @@ function LibraryHeader() {
       <Text type="warning">
         My library
       </Text>
-      <Text type="warning" style={{ cursor: 'pointer' }} onClick={() => window.location.href = pathNames.home}>
+      <Link to={pathNames.home}>
         Search
-      </Text>
+      </Link>
       <Text>
         <Popconfirm
           title={`Hi ${name.split(' ')[0]}, you are about to sign out of your account`}

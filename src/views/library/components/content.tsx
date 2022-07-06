@@ -26,7 +26,7 @@ function Content() {
   return (
     <div style={{ margin: '5vmin' }}>
       <Row gutter={[12, 18]}>
-        {data.map((e, index:number) => (
+        {data.map((e) => (
           <Col className="gutter-row" span={6}>
             <Card
               hoverable

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
+import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
 import { Login } from './views/login';
 import { HomePage } from './views/homePage';
@@ -16,11 +17,23 @@ function MainRouter(): JSX.Element {
   const [token, setToken] = useState<string>('');
   const [id, setId] = useState<string>('');
 
+  const isLogged = () => {
+    const tokenExipiryTime: string = window.localStorage.getItem('tokenEXpiryTime') || '';
+    if (moment().format() < tokenExipiryTime) {
+      return;
+    } else {
+      window.localStorage.removeItem('token');
+      window.localStorage.removeItem('tokenEXpiryTime');
+      return;
+    }
+  };
   useEffect(() => {
     const token: string = window.localStorage.getItem('token') || '';
     const { hash } = window.location;
     window.location.hash = '';
+    isLogged();
     if (!token && hash) {
+      window.localStorage.setItem('tokenEXpiryTime', moment().add(1, 'hours').format());
       const _token = hash.split('&')[0].split('=')[1];
       window.localStorage.setItem('token', _token);
       setToken(_token);
@@ -73,14 +86,9 @@ function MainRouter(): JSX.Element {
     <Router>
       <Routes>
         <Route path={pathNames.login} element={<Login />} />
-        {token
-          ? (
-            <>
-              <Route path={pathNames.home} element={<HomePage />} />
-              <Route path={pathNames.library} element={<Library />} />
-            </>
-          )
-          : <Route path={pathNames.login} element={<Login />} />}
+        <Route path={pathNames.wildroute} element={<Login />} />
+        {!token ? <Route path={pathNames.wildroute} element={<Login />} /> : <Route path={pathNames.home} element={<HomePage />} />}
+        {!token ? <Route path={pathNames.wildroute} element={<Login />} /> : <Route path={pathNames.library} element={<Library />} />}
       </Routes>
     </Router>
   );
