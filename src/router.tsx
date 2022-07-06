@@ -34,7 +34,7 @@ function MainRouter(): JSX.Element {
     window.location.hash = '';
     if(token) isLogged();
     if (!token && hash) {
-      window.localStorage.setItem('tokenEXpiryTime', moment().add(0.02, 'hours').format());
+      window.localStorage.setItem('tokenEXpiryTime', moment().add(1, 'hours').format());
       const _token = hash.split('&')[0].split('=')[1];
       window.localStorage.setItem('token', _token);
       setToken(_token);
