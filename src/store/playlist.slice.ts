@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IPlaylistType } from '../interfaces/PlaylistType.interface';
 
 const initialState: IPlaylistType = {
-  data: []  
+  data: [],
 };
 
 const mySlice = createSlice({
@@ -13,13 +13,13 @@ const mySlice = createSlice({
       state.data.push(action.payload);
     },
     deleteSongFromPlaylist: (state, action) => {
-      state.data.splice(state.data.findIndex(item => item.trackUri === action.payload), 1)
-      return state
-    }, 
+      state.data.splice(state.data.findIndex((item) => item.trackUri === action.payload), 1);
+      return state;
+    },
     clearPlaylist: (state) => {
       state.data = [];
       return state;
-    }
+    },
   },
 });
 
@@ -28,10 +28,10 @@ const mySlice = createSlice({
 // })
 
 const {
-  setPlaylist, clearPlaylist, deleteSongFromPlaylist
+  setPlaylist, clearPlaylist, deleteSongFromPlaylist,
 } = mySlice.actions;
 
 export {
-  setPlaylist, clearPlaylist, deleteSongFromPlaylist
+  setPlaylist, clearPlaylist, deleteSongFromPlaylist,
 };
 export default mySlice.reducer;

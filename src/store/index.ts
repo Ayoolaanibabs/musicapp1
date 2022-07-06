@@ -6,7 +6,6 @@ import {
 import newReleaseReducer from './newRelease.slice';
 import playlistReducer from './playlist.slice';
 import searchResultReducer from './searchResult.slice';
-
 import userReducer from './user.slice';
 
 const rootReducer = combineReducers({

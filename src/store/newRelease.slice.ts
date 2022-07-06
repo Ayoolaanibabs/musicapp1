@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { INewReleaseType } from '../interfaces/NewReleaseType.interface';
 
 const initialState: INewReleaseType = {
-  data: []  
+  data: [],
 };
 
 const mySlice = createSlice({

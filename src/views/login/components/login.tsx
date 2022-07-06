@@ -3,7 +3,6 @@ import './styles.css';
 import { loginEndpoint } from '../../../config/spotify';
 
 function Login() {
-
   return (
     <div className="login-page">
       <img

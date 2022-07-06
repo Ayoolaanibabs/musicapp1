@@ -3,11 +3,11 @@ export interface IPlaylist{
   imageUrl: string;
   trackUri: string;
   spotifyId: string;
-};
+}
 
 export interface IPlaylistType{
   data: IPlaylist[];
-};
+}
 
 export interface ICreatePlaylistData{
   name: string;

@@ -4,8 +4,8 @@ export interface ISearchResult{
   album: string;
   time: string;
   trackUri: string;
-};
+}
 
 export interface ISearchResultType{
   data: ISearchResult[];
-};
+}
