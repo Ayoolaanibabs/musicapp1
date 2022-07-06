@@ -32,9 +32,9 @@ function MainRouter(): JSX.Element {
     const token: string = window.localStorage.getItem('token') || '';
     const { hash } = window.location;
     window.location.hash = '';
-    isLogged();
+    if(token) isLogged();
     if (!token && hash) {
-      window.localStorage.setItem('tokenEXpiryTime', moment().add(1, 'hours').format());
+      window.localStorage.setItem('tokenEXpiryTime', moment().add(0.02, 'hours').format());
       const _token = hash.split('&')[0].split('=')[1];
       window.localStorage.setItem('token', _token);
       setToken(_token);
