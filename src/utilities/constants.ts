@@ -1,6 +1,3 @@
-import { ListItemLayout, ListSize } from "antd/lib/list";
-import { TooltipPlacement } from "antd/lib/tooltip";
-import React from "react";
 import { INotificationType } from "../interfaces/NotificationType.interface";
 
 export const PATH_NAMES = {
@@ -39,14 +36,13 @@ export const MESSAGES = {
 export const TEXTS = {
   YES: 'Yes',
   NO: 'No',
+  OK: 'OK',
   SEARCH: 'Search',
   DELETE: 'Delete',
   FROM_LIBRARY: 'from Library',
   PLAYLIST_NAME: 'Music App Playlist',
   PLAYLIST_DESCRIPTION: 'Playlist from music app',
 };
-
-export const BOTTOM_LEFT_PLACEMENT: TooltipPlacement = 'bottomLeft';
 
 export const SPOTIFY_SCOPES = {
   PLAYLIST_MODIFY_PRIVATE: 'playlist-modify-private',
@@ -63,26 +59,14 @@ export const MUSIC_APP_TOKEN_EXPIRY_TIME: string = 'MUSIC_APP_TOKEN_EXPIRY_TIME'
 
 export const SPOTIFY_URLS = {
   NEW_RELEASES: 'browse/new-releases?limit=4',
-  SEARCH: 'search?q=',
-  SEARCH_TYPE: '&type=track',
-  CREATE_PLAYLIST_USER: 'users/',
-  CREATE_PLAYLIST_PLAYLISTS: '/playlists',
-  ADD_TO_PLAYLIST_PLAYLISTS: 'playlists/',
-  ADD_TO_PLATLIST_TRACK: '/tracks?uris=',
-  GET_ALBUM_TRACKS_ALBUMS: 'albums/',
-  GET_ALBUM_TRACKS_TRACK: '/tracks',
+  // ADD_TO_PLAYLIST_PLAYLISTS: 'playlists/',
+  // ADD_TO_PLATLIST_TRACK: '/tracks?uris=',
 };
 
 export const IMAGE_ALT_TEXTS = {
   USER: 'user',
   SPOTIFY_LOGO: 'logo-spotify',
 };
-
-export const ANTD_META_DESCRIPTION_SAVE_TO_LIBRARY: React.ReactNode = 'Save to Library';
-
-export const HORIZONTAL_LIST_ITEM_LAYOUT: ListItemLayout = 'horizontal';
-
-export const LIST_SIZE_SMALL: ListSize = 'small';
 
 export const CLASS_NAMES = {
   CONTAINER: 'container',
@@ -97,6 +81,13 @@ export const CLASS_NAMES = {
   LOGO: 'logo',
   LOGIN_BTN: 'login-btn',
   LOGIN_PAGE: 'login-page',
+  HEADER: 'header',
+  LIBRARY_TEXT: 'library-text',
+  LOGOUT: 'logout',
+  INFO: 'info',
+  HOME_HEADER: 'home-header',
+  NAME: 'name',
+  MINUS_ICON: 'minus-icon',
 };
 
 export const ALBUM_TYPE = {

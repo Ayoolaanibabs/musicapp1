@@ -5,7 +5,7 @@ import { addSong, deleteSong } from '../../../config/firebase';
 import { ISearchResult } from '../../../interfaces/SearchResultType.interface';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { deleteSongFromPlaylist, setPlaylist } from '../../../store/playlist.slice';
-import { CLASS_NAMES, HORIZONTAL_LIST_ITEM_LAYOUT, LIST_SIZE_SMALL } from '../../../utilities/constants';
+import { CLASS_NAMES } from '../../../utilities/constants';
 import convertMsToMinutesSeconds from '../../../utilities/helper';
 import './index.css';
 
@@ -36,8 +36,8 @@ function SearchResults() {
       <List
         bordered
       // loading={loading}
-        itemLayout={HORIZONTAL_LIST_ITEM_LAYOUT}
-        size={LIST_SIZE_SMALL}
+        itemLayout="horizontal"
+        size="small"
         dataSource={data}
         renderItem={(item: ISearchResult) => {
           const result = playlistData.data.find((playlist) => item.trackUri === playlist.trackUri);
@@ -45,7 +45,7 @@ function SearchResults() {
             <>
               <List.Item>
                 <List.Item.Meta
-                  avatar={<Avatar src={item.imageUrl} />}
+                  avatar={<Avatar src={item.imageUrl} className={CLASS_NAMES.AVATAR} />}
                   title={(
                     <div className={CLASS_NAMES.LIST_ITEM_TITLE}>
                       <div className={CLASS_NAMES.LIST_ITEM_NAME}>
@@ -53,7 +53,7 @@ function SearchResults() {
                       </div>
                       <div className={CLASS_NAMES.LIST_ITEM_NAME}>{item.album}</div>
                       <div>{convertMsToMinutesSeconds(Number(item.time))}</div>
-                      { result ? <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => deleteTrack(item)} /> : <PlusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => addTrack(item)} /> }
+                      { result ? <MinusCircleOutlined style={{ fontSize: '24px' }} onClick={() => deleteTrack(item)} /> : <PlusCircleOutlined style={{ fontSize: '24px' }} onClick={() => addTrack(item)} /> }
                     </div>
                 )}
                 />

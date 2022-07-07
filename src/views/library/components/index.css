@@ -5,3 +5,53 @@
 .card-image {
   height: 25vmin;
 }
+
+.header {
+  text-align: center;
+}
+
+.library-text {
+  font-size: 24px; 
+  font-weight: bolder;
+  color: #ffffff;
+}
+
+.logout {
+  color: #ffffff !important;
+  padding-left: 60px;
+}
+
+.info{
+  display: none !important;
+}
+
+.avatar {
+  height: 24px;
+  width: 24px ;
+  margin-right: 60px;
+}
+
+.minus-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 575.98px) {
+.library-text {
+  font-size: 20px; 
+}
+
+.info{
+  display: inline-block !important;
+  margin-left: 2vmin;
+}
+
+.logout {
+  padding-left: 10px;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+}

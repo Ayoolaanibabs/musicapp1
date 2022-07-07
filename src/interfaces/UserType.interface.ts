@@ -1,9 +1,7 @@
-import { ReactNode } from 'react';
-
 interface IUser {
   id: string;
   name: string;
-  imageUrl: ReactNode | string | null;
+  imageUrl: string;
 }
 
 export interface IUserType {

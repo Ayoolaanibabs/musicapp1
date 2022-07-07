@@ -1,9 +1,7 @@
 import { LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Popconfirm, Typography } from 'antd';
+import { Button, Popconfirm, Typography } from 'antd';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { 
-  BOTTOM_LEFT_PLACEMENT,
   CLASS_NAMES,
   MESSAGES,
   MUSIC_APP_TOKEN,
@@ -14,10 +12,13 @@ import {
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import Search from './search';
 import './index.css';
+import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 
 function HomePageHeader() {
+  const navigate = useNavigate();
+
   const {
     user: {
       name, imageUrl,
@@ -31,26 +32,30 @@ function HomePageHeader() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className={CLASS_NAMES.HOME_HEADER}>
       <Text type="warning">
-        <Avatar src={imageUrl} className={CLASS_NAMES.AVATAR} alt="user" />
+        <img src={imageUrl} className={CLASS_NAMES.AVATAR} alt="user" />
       </Text>
-      <div style={{ color: 'yellow' }}>
+      <div className={CLASS_NAMES.NAME}>
         {name.split(' ')[0]}
       </div>
       <Search />
-      <Link to={PATH_NAMES.LIBRARY}>
-        My library
-      </Link>
+      <Text>
+        <Button shape="round" onClick={()=>navigate(PATH_NAMES.LIBRARY)}>
+          <div data-testid="library">
+            My library
+          </div>
+        </Button>
+      </Text>
       <Text>
         <Popconfirm
           title={`${MESSAGES.HI} ${name.split(' ')[0]}, ${MESSAGES.SIGN_OUT}`}
           onConfirm={logout}
           okText={TEXTS.YES}
           cancelText={TEXTS.NO}
-          placement={BOTTOM_LEFT_PLACEMENT}
+          placement="bottomLeft"
         >
-          <LogoutOutlined style={{ color: '#ffffff' }} />
+          <LogoutOutlined className={CLASS_NAMES.LOGOUT} />
         </Popconfirm>
       </Text>
     </div>

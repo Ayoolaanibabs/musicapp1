@@ -15,12 +15,14 @@ const rootReducer = combineReducers({
   playlist: playlistReducer,
 });
 
-const store = configureStore({
+export const createStore =  () => configureStore({
   reducer: rootReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: false,
     immutableCheck: false,
   }),
 });
+
+export const store = createStore();
 
 export default store;

@@ -4,14 +4,14 @@ import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import apiClient from '../../../config/spotify';
 import { clearSearchResult, setSearchResult } from '../../../store/searchResult.slice';
-import { CLASS_NAMES, NOTIFICATION_TYPE, SPOTIFY_URLS, TEXTS } from '../../../utilities/constants';
+import { CLASS_NAMES, NOTIFICATION_TYPE, TEXTS } from '../../../utilities/constants';
 import { sendNotification } from '../../../utilities/helper';
 import './index.css';
 
 function Search() {
   const dispatch = useDispatch();
   const search = async (data: string) => {
-    await apiClient.get(`${SPOTIFY_URLS.SEARCH}${data}${SPOTIFY_URLS.SEARCH_TYPE}`).then((response) => {
+    await apiClient.get(`search?q=${data}&type=track`).then((response) => {
       response.data.tracks.items.forEach((element: any) => {
         dispatch(setSearchResult({
           name: element.name,

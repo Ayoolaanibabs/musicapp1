@@ -1,17 +1,28 @@
 import { LogoutOutlined } from '@ant-design/icons';
-import { Avatar, Popconfirm, Typography } from 'antd';
+import { Button, Popconfirm, Typography } from 'antd';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import apiClient from '../../../config/spotify';
 import { ICreatePlaylistData, IPlaylist } from '../../../interfaces/PlaylistType.interface';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
-import { BOTTOM_LEFT_PLACEMENT, IMAGE_ALT_TEXTS, MESSAGES, MUSIC_APP_TOKEN, MUSIC_APP_TOKEN_EXPIRY_TIME, NOTIFICATION_TYPE, PATH_NAMES, SPOTIFY_URLS, TEXTS } from '../../../utilities/constants';
+import useWindowDimensions  from '../../../hooks/windows';
+import { 
+  CLASS_NAMES, 
+  IMAGE_ALT_TEXTS, 
+  MESSAGES, 
+  MUSIC_APP_TOKEN, 
+  MUSIC_APP_TOKEN_EXPIRY_TIME, 
+  NOTIFICATION_TYPE, 
+  PATH_NAMES, 
+  TEXTS 
+} from '../../../utilities/constants';
 import { sendNotification } from '../../../utilities/helper';
 import './index.css';
 
 const { Text } = Typography;
 
 function LibraryHeader() {
+  const navigate = useNavigate();
   const {
     user: {
       name, imageUrl,
@@ -38,7 +49,7 @@ function LibraryHeader() {
       description: TEXTS.PLAYLIST_DESCRIPTION,
       public: false,
     };
-    apiClient.post(`${SPOTIFY_URLS.CREATE_PLAYLIST_USER}${id}${SPOTIFY_URLS.CREATE_PLAYLIST_PLAYLISTS}`, data)
+    apiClient.post(`users/${id}/playlists`, data)
     .then((response) => {
       addToSpotifyPlaylist(response.data.id);
     }).catch((error) => {
@@ -52,7 +63,7 @@ function LibraryHeader() {
       songUris.push(e.trackUri);
     });
     const uris = songUris.join(',');
-    apiClient.post(`${SPOTIFY_URLS.ADD_TO_PLAYLIST_PLAYLISTS}${playlistId}${SPOTIFY_URLS.ADD_TO_PLATLIST_TRACK}${uris}`)
+    apiClient.post(`playlists/${playlistId}/tracks?uris=${uris}`)
     .then(() => {
       sendNotification(NOTIFICATION_TYPE.SUCCESS, MESSAGES.PLAYLIST_EXPORT_SUCCESS);
     }).catch((error) => {
@@ -60,33 +71,46 @@ function LibraryHeader() {
     });
   };
 
+  const { isExtraSmall, isSmall } = useWindowDimensions();
+
+  const exportText = () => {
+    if (isExtraSmall || isSmall) {
+      return 'Export';
+    } else{
+      return 'Export to My Spotify';
+    }
+  };
+
+
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Text type="warning">
-        <Avatar src={imageUrl} alt={IMAGE_ALT_TEXTS.USER} />
-      </Text>
-      <Text type="warning">
-        <div style={{ cursor: 'pointer' }} onClick={createPlaylist}>
-          Export To My Spotify
+    <div className={CLASS_NAMES.HOME_HEADER}>
+        <Text>
+          <img src={imageUrl} className={CLASS_NAMES.AVATAR} alt={IMAGE_ALT_TEXTS.USER} />
+        </Text>
+        <Text>
+        <Button shape='round' onClick={createPlaylist}>
+            {exportText()}
+        </Button>
+        </Text>
+        <div className={CLASS_NAMES.LIBRARY_TEXT} data-testid="library-text">
+          My Library
         </div>
-      </Text>
-      <Text type="warning">
-        My library
-      </Text>
-      <Link to={PATH_NAMES.HOME}>
-        Search
-      </Link>
-      <Text>
-        <Popconfirm
-          title={`${MESSAGES.HI} ${name.split(' ')[0]}, ${MESSAGES.SIGN_OUT}`}
-          onConfirm={logout}
-          okText={TEXTS.YES}
-          cancelText={TEXTS.NO}
-          placement={BOTTOM_LEFT_PLACEMENT}
-        >
-          <LogoutOutlined style={{ color: '#ffffff' }} />
-        </Popconfirm>
-      </Text>
+        <Text>
+          <Button shape='round' data-testid="search" onClick={() => navigate(PATH_NAMES.HOME)}>
+            Search
+          </Button>
+        </Text>
+        <Text>
+          <Popconfirm
+            title={`${MESSAGES.HI} ${name.split(' ')[0]}, ${MESSAGES.SIGN_OUT}`}
+            onConfirm={logout}
+            okText={TEXTS.YES}
+            cancelText={TEXTS.NO}
+            placement="bottomLeft"
+          >
+            <LogoutOutlined className={CLASS_NAMES.LOGOUT} />
+          </Popconfirm>
+        </Text>
     </div>
   );
 }

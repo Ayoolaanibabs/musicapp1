@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { UserOutlined } from '@ant-design/icons';
 import { Login } from './views/login';
 import { HomePage } from './views/homePage';
 import { Library } from './views/library';
@@ -57,7 +56,7 @@ function MainRouter(): JSX.Element {
         : dispatch(setUserData({
           id: response.data.id,
           name: response.data.display_name,
-          imageUrl: <UserOutlined />,
+          imageUrl: 'https://i.stack.imgur.com/34AD2.jpg',
         }));
       setId(response.data.id);
     }).catch((error) => {

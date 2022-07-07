@@ -5,6 +5,7 @@ import {
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteSong } from '../../../config/firebase';
+import useWindowDimensions from '../../../hooks/windows';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { deleteSongFromPlaylist } from '../../../store/playlist.slice';
 import { CLASS_NAMES, IMAGE_ALT_TEXTS, TEXTS } from '../../../utilities/constants';
@@ -25,11 +26,22 @@ function Content() {
     dispatch(deleteSongFromPlaylist(trackUri));
   };
 
+  const { isExtraSmall, isSmall, isMedium } = useWindowDimensions();
+
+
+  const span = () => {
+    if (isExtraSmall || isSmall || isMedium) {
+      return 12;
+    } else{
+      return 6;
+    }
+  };
+
   return (
     <div className={CLASS_NAMES.CONTAINER}>
-      <Row gutter={[12, 18]}>
+      <Row gutter={[14, 12]}>
         {data.map((e) => (
-          <Col span={6}>
+          <Col span={span()}>
             <Card
               hoverable
               loading={loading}
@@ -47,7 +59,6 @@ function Content() {
                   >
                     <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_LEFT} />
                   </Popconfirm>,
-
                 ]}
               />
             </Card>

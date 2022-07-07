@@ -19,6 +19,20 @@
   padding: 0 5vmin !important;
 }
 
+.ant-layout-content {
+  min-height: 92vh !important;
+}
+
+.ant-card-meta-description {
+  color: #2e45b9 !important;
+}
+
+@media (max-width: 767px){
+  .ant-card-meta-description {
+    font-size: 10px !important;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

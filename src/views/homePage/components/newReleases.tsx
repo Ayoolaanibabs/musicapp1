@@ -6,13 +6,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSong, deleteSong } from '../../../config/firebase';
 import apiClient from '../../../config/spotify';
+import useWindowDimensions from '../../../hooks/windows';
 import { INewRelease } from '../../../interfaces/NewReleaseType.interface';
 import { IStoreType } from '../../../interfaces/StoreType.interface';
 import { setNewRelease } from '../../../store/newRelease.slice';
 import { deleteSongFromPlaylist, setPlaylist } from '../../../store/playlist.slice';
 import {
   ALBUM_TYPE,
-  ANTD_META_DESCRIPTION_SAVE_TO_LIBRARY,
   CLASS_NAMES,
   IMAGE_ALT_TEXTS,
   MESSAGES,
@@ -33,7 +33,7 @@ function NewReleases() {
   const playlistData = useSelector((state: IStoreType) => state.playlist);
 
   const getTrackFromAlbumId = (albumId: string, imageUrl: string, albumName: string, albumType: string) => {
-    apiClient.get(`${SPOTIFY_URLS.GET_ALBUM_TRACKS_ALBUMS}${albumId}${SPOTIFY_URLS.GET_ALBUM_TRACKS_TRACK}`)
+    apiClient.get(`albums/${albumId}/tracks`)
     .then((response) => {
       if(albumType === ALBUM_TYPE.SINGLE) {
         dispatch(setNewRelease({
@@ -89,14 +89,25 @@ function NewReleases() {
     dispatch(deleteSongFromPlaylist(item.trackUri));
   };
 
+  const { isExtraSmall, isSmall, isMedium } = useWindowDimensions();
+
+
+  const span = () => {
+    if (isExtraSmall || isSmall || isMedium) {
+      return 10;
+    } else{
+      return 5;
+    }
+  };
+
   return (
     <>
-      <Divider orientation='left'>New Releases</Divider>
-      <Row gutter={12} className={CLASS_NAMES.NEW_RELEASE_ROW}>
+      <Divider orientation='left' data-testid="new-releases">New Releases</Divider>
+      <Row gutter={[14, 12]} className={CLASS_NAMES.NEW_RELEASE_ROW}>
         {data.map((e: INewRelease) => {
           const result = playlistData.data.find((playlist) => e.trackUri === playlist.trackUri);
           return (
-            <Col span={5}>
+            <Col span={span()}>
               <Card
                 hoverable
                 loading={loading}
@@ -105,9 +116,9 @@ function NewReleases() {
                 <Meta
                   title={e.name}
                   description={[
-                    ANTD_META_DESCRIPTION_SAVE_TO_LIBRARY,
-                    <div>
-                    { result ? <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => deleteTrack(e)} /> : <PlusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} onClick={() => addTrack(e)} /> }
+                    <div onClick={() => result ? deleteTrack(e) : addTrack(e)}> 
+                      {result ? 'Remove from' : 'Save to'} Library
+                      { result ? <MinusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} /> : <PlusCircleOutlined className={CLASS_NAMES.ICON_MARGIN_TOP} /> }
                     </div>
                   ]}
                 />
