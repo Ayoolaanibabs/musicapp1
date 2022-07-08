@@ -6,6 +6,8 @@ import { createStore } from "./store";
 import NewReleases from "./views/homePage/components/newReleases";
 import LibraryHeader from "./views/library/components/libraryHeader";
 import { Login } from "./views/login";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { PATH_NAMES } from "./utilities/constants";
 window.matchMedia =
   window.matchMedia ||
   function () {
@@ -19,7 +21,10 @@ window.matchMedia =
 test("My library Button renders", (): void => {
   render(
     <Provider store={createStore()}>
-      <HomePageHeader />
+      <BrowserRouter>
+        <HomePageHeader />
+      </BrowserRouter>
+        
     </Provider>
   );
   const divElement = screen.getByTestId("library");
@@ -39,7 +44,9 @@ test("New releases renders", (): void => {
 test("My library Text renders", (): void => {
   render(
     <Provider store={createStore()}>
-      <LibraryHeader />
+      <BrowserRouter>
+        <LibraryHeader />
+      </BrowserRouter>
     </Provider>
   );
   const divElement = screen.getByTestId("library-text");
@@ -49,7 +56,10 @@ test("My library Text renders", (): void => {
 test("Search Button renders", (): void => {
   render(
     <Provider store={createStore()}>
-      <LibraryHeader />
+      <BrowserRouter>
+        <LibraryHeader />
+      </BrowserRouter>
+        
     </Provider>
   );
   const divElement = screen.getByTestId("search");
