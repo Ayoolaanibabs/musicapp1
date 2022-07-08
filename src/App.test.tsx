@@ -6,8 +6,7 @@ import { createStore } from "./store";
 import NewReleases from "./views/homePage/components/newReleases";
 import LibraryHeader from "./views/library/components/libraryHeader";
 import { Login } from "./views/login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { PATH_NAMES } from "./utilities/constants";
+import { BrowserRouter } from "react-router-dom";
 window.matchMedia =
   window.matchMedia ||
   function () {
