@@ -1,7 +1,7 @@
-export type NotificationType = 'success' | 'info' | 'warning' | 'error';
+export type NotificationType = "success" | "info" | "warning" | "error";
 
 export interface INotificationType {
-  SUCCESS : NotificationType;
+  SUCCESS: NotificationType;
   WARNING: NotificationType;
   INFO: NotificationType;
   ERROR: NotificationType;

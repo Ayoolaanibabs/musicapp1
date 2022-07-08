@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { ISearchResultType } from '../interfaces/SearchResultType.interface';
+import { createSlice } from "@reduxjs/toolkit";
+import { ISearchResultType } from "../interfaces/SearchResultType.interface";
 
 const initialState: ISearchResultType = {
   data: [],
 };
 
 const mySlice = createSlice({
-  name: 'searchResult',
+  name: "searchResult",
   initialState,
   reducers: {
     setSearchResult: (state, action) => {
@@ -20,11 +20,7 @@ const mySlice = createSlice({
   },
 });
 
-const {
-  setSearchResult, clearSearchResult,
-} = mySlice.actions;
+const { setSearchResult, clearSearchResult } = mySlice.actions;
 
-export {
-  setSearchResult, clearSearchResult,
-};
+export { setSearchResult, clearSearchResult };
 export default mySlice.reducer;

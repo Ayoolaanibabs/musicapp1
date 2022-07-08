@@ -1,9 +1,9 @@
-export interface INewRelease{
+export interface INewRelease {
   name: string;
   imageUrl: string;
   trackUri: string;
 }
 
-export interface INewReleaseType{
+export interface INewReleaseType {
   data: INewRelease[];
 }

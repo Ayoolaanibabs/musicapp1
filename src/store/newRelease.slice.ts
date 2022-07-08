@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { INewReleaseType } from '../interfaces/NewReleaseType.interface';
+import { createSlice } from "@reduxjs/toolkit";
+import { INewReleaseType } from "../interfaces/NewReleaseType.interface";
 
 const initialState: INewReleaseType = {
   data: [],
 };
 
 const mySlice = createSlice({
-  name: 'newRelease',
+  name: "newRelease",
   initialState,
   reducers: {
     setNewRelease: (state, action) => {
@@ -15,11 +15,7 @@ const mySlice = createSlice({
   },
 });
 
-const {
-  setNewRelease,
-} = mySlice.actions;
+const { setNewRelease } = mySlice.actions;
 
-export {
-  setNewRelease,
-};
+export { setNewRelease };
 export default mySlice.reducer;

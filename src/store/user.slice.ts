@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { IUserType } from '../interfaces/UserType.interface';
+import { createSlice } from "@reduxjs/toolkit";
+import { IUserType } from "../interfaces/UserType.interface";
 
 const initialState: IUserType = {
   user: {
-    id: '',
-    name: '',
-    imageUrl: '',
+    id: "",
+    name: "",
+    imageUrl: "",
   },
 };
 
 const mySlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setUserData: (state, action) => {
@@ -19,11 +19,7 @@ const mySlice = createSlice({
   },
 });
 
-const {
-  setUserData,
-} = mySlice.actions;
+const { setUserData } = mySlice.actions;
 
-export {
-  setUserData,
-};
+export { setUserData };
 export default mySlice.reducer;

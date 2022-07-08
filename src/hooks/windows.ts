@@ -1,11 +1,11 @@
-import { useMediaQuery } from 'react-responsive';
+import { useMediaQuery } from "react-responsive";
 
 const useWindowDimensions = (): {
-isExtraSmall: boolean;
-isSmall: boolean;
-isMedium: boolean;
-isLarge: boolean;
-isExtraLarge: boolean;
+  isExtraSmall: boolean;
+  isSmall: boolean;
+  isMedium: boolean;
+  isLarge: boolean;
+  isExtraLarge: boolean;
 } => {
   const isExtraSmall = useMediaQuery({ maxWidth: 576, minWidth: 0 });
   const isSmall = useMediaQuery({ maxWidth: 767, minWidth: 577 });

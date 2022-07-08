@@ -1,4 +1,4 @@
-export interface ISearchResult{
+export interface ISearchResult {
   name: string;
   imageUrl: string;
   album: string;
@@ -6,6 +6,6 @@ export interface ISearchResult{
   trackUri: string;
 }
 
-export interface ISearchResultType{
+export interface ISearchResultType {
   data: ISearchResult[];
 }

@@ -5,5 +5,5 @@ interface IUser {
 }
 
 export interface IUserType {
-  user: IUser,
+  user: IUser;
 }
