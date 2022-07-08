@@ -12,6 +12,7 @@ import {
   MUSIC_APP_TOKEN_EXPIRY_TIME,
   NOTIFICATION_TYPE,
   PATH_NAMES,
+  SPOTIFY_URLS,
 } from "./utilities/constants";
 import { setUserData } from "./store/user.slice";
 import apiClient, { setClientToken } from "./config/spotify";
@@ -59,7 +60,7 @@ function MainRouter(): JSX.Element {
   useEffect((): void => {
     if (token) {
       apiClient
-        .get("me")
+        .get(SPOTIFY_URLS.GET_USER)
         .then((response) => {
           response.data.images.length !== 0
             ? dispatch(
@@ -79,7 +80,10 @@ function MainRouter(): JSX.Element {
           setId(response.data.id);
         })
         .catch((error) => {
-          sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
+          if (error.response.status === 403) {
+            sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
+          }
+          sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
         });
     }
   });

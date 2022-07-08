@@ -32,6 +32,7 @@ export const MESSAGES = {
   PLAYLIST_EXPORT_SUCCESS: "Playlist Successfully Exported",
   NO_SONGS: "No Songs have been added to libarary",
   CANNOT_ADD_ALBUM: "is an album, only tracks can be added to the library",
+  NOT_FOUND: "Albums were not found, please try again later",
 };
 
 export const TEXTS = {
@@ -69,6 +70,7 @@ export const MUSIC_APP_TOKEN_EXPIRY_TIME: string =
   "MUSIC_APP_TOKEN_EXPIRY_TIME";
 
 export const SPOTIFY_URLS = {
+  GET_USER: "me",
   NEW_RELEASES: "browse/new-releases?limit=4",
   SEARCH: "search?q=",
   SEARCH_TYPE: "&type=track",

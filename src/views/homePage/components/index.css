@@ -4,7 +4,8 @@
 
 .avatar {
   height: 24px;
-  width: 24px ;
+  width: 240px ;
+  border-radius: 50%;
 }
 
 .new-release-row {
