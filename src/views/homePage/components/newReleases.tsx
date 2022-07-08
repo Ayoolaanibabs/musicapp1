@@ -70,7 +70,7 @@ function NewReleases(): JSX.Element {
         }
       })
       .catch((error) => {
-        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
       });
   };
 
@@ -92,7 +92,7 @@ function NewReleases(): JSX.Element {
             });
           })
           .catch((error) => {
-            sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+            sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
           });
       })();
     }

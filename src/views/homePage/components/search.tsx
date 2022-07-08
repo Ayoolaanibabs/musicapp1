@@ -36,7 +36,7 @@ function Search(): JSX.Element {
         });
       })
       .catch((error) => {
-        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
       });
   };
   const onChange = (e: ChangeEvent<HTMLInputElement>): void => {

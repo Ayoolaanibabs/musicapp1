@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUserType } from "../interfaces/UserType.interface";
+import { IMAGE_URL } from "../utilities/constants";
 
 const initialState: IUserType = {
   user: {
     id: "",
     name: "",
-    imageUrl: "",
+    imageUrl: IMAGE_URL,
   },
 };
 

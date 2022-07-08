@@ -54,7 +54,7 @@ function LibraryHeader(): JSX.Element {
         addToSpotifyPlaylist(response.data.id);
       })
       .catch((error) => {
-        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
       });
   };
 
@@ -73,7 +73,7 @@ function LibraryHeader(): JSX.Element {
         );
       })
       .catch((error) => {
-        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+        sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
       });
   };
 

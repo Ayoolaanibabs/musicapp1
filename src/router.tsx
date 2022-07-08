@@ -79,7 +79,7 @@ function MainRouter(): JSX.Element {
           setId(response.data.id);
         })
         .catch((error) => {
-          sendNotification(NOTIFICATION_TYPE.ERROR, `${error.message}`);
+          sendNotification(NOTIFICATION_TYPE.ERROR, `${error.response.data}`);
         });
     }
   });
