@@ -19,7 +19,6 @@ import {
   CLASS_NAMES,
   IMAGE_ALT_TEXTS,
   LARGE_SIZE_NEW_RELEASES_COLUMN_SPAN,
-  MESSAGES,
   MY_LIBRARY_NEW_RELEASES_ROW_COLUMN_GUTTER,
   NOTIFICATION_TYPE,
   SMALL_SIZE_NEW_RELEASES_COLUMN_SPAN,
@@ -103,15 +102,8 @@ function NewReleases(): JSX.Element {
     user: { id },
   }: IUserType = useSelector((state: IStoreType) => state.user);
   const addTrack = async (item: INewRelease): Promise<void> => {
-    if (item.trackUri === null) {
-      sendNotification(
-        NOTIFICATION_TYPE.ERROR,
-        `${item.name} ${MESSAGES.CANNOT_ADD_ALBUM}`
-      );
-    } else {
-      await addSong(id, item.imageUrl, item.name, item.trackUri);
-      dispatch(setPlaylist({ ...item, spotifyId: id }));
-    }
+    await addSong(id, item.imageUrl, item.name, item.trackUri);
+    dispatch(setPlaylist({ ...item, spotifyId: id }));
   };
 
   const deleteTrack = (item: INewRelease): void => {
