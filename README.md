@@ -1,3 +1,32 @@
+## Spotify Music App.
+
+a Music application built using spotify's api, to search, add music to a library on the app and export user's library to a playlist on spotify
+
+### Getting started
+
+- [`git clone https://github.com/Ayoolaanibabs/musicapp1.git`](https://github.com/Ayoolaanibabs/musicapp1.git)
+
+- `npm start`
+- `open http://localhost:3000/ on your browser to view the application`
+
+### Link to deployed site 
+partner-hero-music-app.herokuapp.com
+
+**Kindly contact me to add your email to the spotify developer dasboard to enable spotify login.**
+
+### Technologies/Language and Libraries used
+
+- HTML
+- CSS
+- React
+- Ant Design
+- Firebase
+
+### Contributions
+
+  - Feel Free to Fork the repo and add your own contributions
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
