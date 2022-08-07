@@ -1,6 +1,6 @@
 ## Spotify Music App.
 
-a Music application built using spotify's api, to search, add music to a library on the app and export user's library to a playlist on spotify
+A Music application built using spotify's api, to search, add music to a library on the app and export user's library to a playlist on spotify
 
 ### Getting started
 
@@ -10,7 +10,7 @@ a Music application built using spotify's api, to search, add music to a library
 - `open http://localhost:3000/ on your browser to view the application`
 
 ### Link to deployed site 
-partner-hero-music-app.herokuapp.com
+(partner-hero-music-app.herokuapp.com)
 
 **Kindly contact me to add your email to the spotify developer dasboard to enable spotify login.**
 
