@@ -10,7 +10,7 @@ A Music application built using spotify's api, to search, add music to a library
 - `open http://localhost:3000/ on your browser to view the application`
 
 ### Link to deployed site 
-(partner-hero-music-app.herokuapp.com)
+[`Music App`](partner-hero-music-app.herokuapp.com)
 
 **Kindly contact me to add your email to the spotify developer dasboard to enable spotify login.**
 
